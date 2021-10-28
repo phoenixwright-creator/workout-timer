@@ -21,21 +21,25 @@ class WorkoutTimer extends React.Component {
     breakDecrement(){
         // decrement break length by 1 and display the value in the break div
         // break length must be > 0 
+        store.dispatch(actionCreator(breakDecrement));
     }
 
     breakIncrement(){
         // increment break length by 1 and display the value in the break div
         // break length must be <= 60
+        store.dispatch(actionCreator(breakIncrement));
     }
 
     sessionDecrement(){
         // decrement session length by 1 and display the value in the session div
         // session length must be > 0 
+        store.dispatch(actionCreator(sessionDecrement));
     }
 
     sessionIncrement(){
         // increment session length by 1 and display the value in the session div
         // session length must be <= 60
+        store.dispatch(actionCreator(sessionIncrement));
     }
 
     startStop(){
@@ -60,13 +64,13 @@ class WorkoutTimer extends React.Component {
                     <h2 id="break-label">Break Duration</h2>
                     <button id="break-decrement" onClick={this.breakDecrement}>Break Decrement</button>
                     <button id="break-increment" onClick={this.breakIncrement}>Break Increment</button>
-                    <div id="break-length">Break Length</div>
+                    <div id="break-length">{this.state.breakLength}</div>
                 </div>
                 <div id="session-div">
                     <h2 id="session-label">Session Duration</h2>
                     <button id="session-decrement" onClick={this.sessionDecrement}>Session Decrement</button>
                     <button id="session-increment" onClick={this.sessionIncrement}>Session Increment</button>
-                    <div id="break-length">Session Length</div>
+                    <div id="session-length">{this.state.sessionLength}</div>
                 </div>
                 <div id="workout-div">
                     <h2 id="timer-label">Session/Break</h2>
