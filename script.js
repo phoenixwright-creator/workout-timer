@@ -1,14 +1,60 @@
-'use strict'
+
+
+import Provider from 'react-redux';
+
+const defaultState = {
+    breakLength: 5,
+    sessionLength: 25,
+    display: 'session',
+    running: 'off'
+};
+const BREAKINCREMENT = 'BREAKINCREMENT';
+const BREAKDECREMENT = 'BREAKDECREMENT';
+const SESSIONINCREMENT = 'SESSIONINCREMENT';
+const SESSIONDECREMENT = 'SESSIONDECREMENT';
+const breakIncrement = {
+    type: BREAKINCREMENT
+};
+const breakDecrement = {
+    type: BREAKDECREMENT
+};
+const sessionIncrement = {
+    type: SESSIONINCREMENT
+};
+const sessionDecrement = {
+    type: SESSIONDECREMENT
+};
+const actionCreator = (action) => {
+    return action;
+};
+
+const reducer = (state = defaultState, action) => {
+    switch(action.type){
+        case BREAKINCREMENT:
+            return Object.assign({}, state, {breakLength: state.breakLength + 1});
+        case BREAKDECREMENT:
+            return Object.assign({}, state, {breakLength: state.breakLength - 1});
+        case SESSIONINCREMENT:
+            return Object.assign({}, state, {sessionLength: state.sessionLength + 1});
+        case SESSIONDECREMENT:
+            return Object.assign({}, state, {sessionLength: state.sessionLength - 1});
+        default:
+            return state;
+    }
+};
+
+const store = Redux.createStore(reducer);
 
 class WorkoutTimer extends React.Component {
     constructor(props){
         super(props);
+
         this.state = {
             breakLength: 5,
             sessionLength: 25,
             display: 'session',
             running: 'off'
-        }
+        };
 
         this.breakDecrement = this.breakDecrement.bind(this);
         this.breakIncrement = this.breakIncrement.bind(this);
@@ -64,13 +110,13 @@ class WorkoutTimer extends React.Component {
                     <h2 id="break-label">Break Duration</h2>
                     <button id="break-decrement" onClick={this.breakDecrement}>Break Decrement</button>
                     <button id="break-increment" onClick={this.breakIncrement}>Break Increment</button>
-                    <div id="break-length">{this.state.breakLength}</div>
+                    <div id="break-length">BreakLength</div>
                 </div>
                 <div id="session-div">
                     <h2 id="session-label">Session Duration</h2>
                     <button id="session-decrement" onClick={this.sessionDecrement}>Session Decrement</button>
                     <button id="session-increment" onClick={this.sessionIncrement}>Session Increment</button>
-                    <div id="session-length">{this.state.sessionLength}</div>
+                    <div id="session-length">SessionLength</div>
                 </div>
                 <div id="workout-div">
                     <h2 id="timer-label">Session/Break</h2>
@@ -78,67 +124,44 @@ class WorkoutTimer extends React.Component {
                     <button id="start-stop" onClick={this.startStop}>Start/Stop Button</button>
                     <button id="reset" onClick={this.reset}>Reset Button</button>
                 </div>
-                
             </div>
         );
     }
 }
 
+
+function mapStateToProps(state){
+    return ({
+        breakLength: state.breakLength,
+        sessionLength: state.sessionLength,
+        display: state.display,
+        running: state.running
+    });
+}
+
+function mapDispatchToProps(dispatch){
+    return ({
+        addBreak: function(breakIncrement){
+            dispatch(actionCreator(breakIncrement));
+        }
+    });
+}
+
+const connect = ReactRedux.connect;
+const ConnectedComponent = connect(mapStateToProps, mapDispatchToProps)(WorkoutTimer);
+
 class AppWrapper extends React.Component{
+    constructor(props) {
+        super(props);
+    }
+
     render(){
         return (
             <Provider store={store}>
-                <WorkoutTimer />
+                <ConnectedComponent />
             </Provider>
         );
     }
 }
 
-ReactDOM.render(<WorkoutTimer />, document.getElementById("main-container"));
-
-const BREAKINCREMENT = 'BREAKINCREMENT';
-const BREAKDECREMENT = 'BREAKDECREMENT';
-const SESSIONINCREMENT = 'SESSIONINCREMENT';
-const SESSIONDECREMENT = 'SESSIONDECREMENT';
-
-const reducer = (state = defaultState, action) => {
-    switch(action.type){
-        case BREAKINCREMENT:
-            return Object.assign({}, state, {breakLength: state.breakLength + 1});
-        case BREAKDECREMENT:
-            return Object.assign({}, state, {breakLength: state.breakLength - 1});
-        case SESSIONINCREMENT:
-            return Object.assign({}, state, {sessionLength: state.sessionLength + 1});
-        case SESSIONDECREMENT:
-            return Object.assign({}, state, {sessionLength: state.sessionLength - 1});
-        default:
-            return state;
-    }
-};
-
-const store = Redux.createStore(reducer);
-
-const breakIncrement = {
-    type: BREAKINCREMENT
-};
-
-const breakDecrement = {
-    type: BREAKDECREMENT
-};
-
-const sessionIncrement = {
-    type: SESSIONINCREMENT
-};
-
-const sessionDecrement = {
-    type: SESSIONDECREMENT
-};
-
-const actionCreator = (action) => {
-    return action;
-};
-
-store.subscribe(() => console.log("Action dispatched"));
-
 //store.dispatch(actionCreator(breakIncrement));
-
