@@ -12,26 +12,34 @@
 </head>
 <body>
     <div id="main-container">
-        <div id="title-div">
-            <h1 id="title">WorkoutTimer App</h1>
-        </div>
-        <div id="break-div">
-            <h2 id="break-label">Break Duration</h2>
-            <button id="break-decrement" onclick=breakDecrement()>Break Decrement</button>
-            <button id="break-increment" onclick=breakIncrement()>Break Increment</button>
-            <div id="break-length">BreakLength</div>
-        </div>
-        <div id="session-div">
-            <h2 id="session-label">Session Duration</h2>
-            <button id="session-decrement" onclick=sessionDecrement()>Session Decrement</button>
-            <button id="session-increment" onclick=sessionIncrement()>Session Increment</button>
-            <div id="session-length">SessionLength</div>
-        </div>
-        <div id="workout-div">
-            <h2 id="timer-label">Session/Break</h2>
-            <div id="time-left">Time Running (mm:ss)</div>
-            <button id="start-stop" onclick=startStop()>Start/Stop Button</button>
-            <button id="reset" onclick=reset()>Reset Button</button>
+        <div id="content">
+            <div id="title-div">
+                <h1 id="title">WorkoutTimer App</h1>
+            </div>
+            <div id="break-div">
+                <h2 id="break-label">Break Duration</h2>
+                <div id="break-box">
+                    <button id="break-decrement" class="plus-minus-buttons" onclick=breakDecrement()>-</button>
+                    <div id="break-length">BreakLength</div>
+                    <button id="break-increment" class="plus-minus-buttons" onclick=breakIncrement()>+</button>
+                </div>
+            </div>
+            <div id="session-div">
+                <h2 id="session-label">Session Duration</h2>
+                <div id="session-box">
+                    <button id="session-decrement" class="plus-minus-buttons" onclick=sessionDecrement()>-</button>
+                    <div id="session-length">SessionLength</div>
+                    <button id="session-increment" class="plus-minus-buttons" onclick=sessionIncrement()>+</button>
+                </div>
+            </div>
+            <div id="workout-div">
+                <h2 id="timer-label">Session/Break</h2>
+                <div id="startstop-box">
+                    <button id="start-stop" class="start-stop-buttons" onclick=startStop()>Start/Stop</button>
+                    <div id="time-left">Time Running (mm:ss)</div>
+                    <button id="reset" class="start-stop-buttons" onclick=reset()>Reset</button>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.2/redux.min.js" integrity="sha512-F21iSaHGX/3NFz5SuwoH6pGhTPxtoJoWWULqQVPQPtLm7nbK5r8vRSSSYy3Aj+H39cVrVm4+3ikGoVD1AjE0sQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

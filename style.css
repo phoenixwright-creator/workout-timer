@@ -1,11 +1,88 @@
 body{
-    background-color: blanchedalmond;
     margin: 0;
     padding: 0;
-
 }
 
 #main-container{
     background-color: cornflowerblue;
     font-family: 'Anton', sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: blanchedalmond;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 20px;
+    padding-top: 0px;
+    width: 300px;
+}
+
+#break-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 35px;
+    align-items: center;
+    
+}
+
+#session-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 35px;
+    align-items: center;
+}
+
+#time-left{
+    text-align: center;
+}
+
+#startstop-box{
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 35px;
+    align-items: center;
+}
+
+.plus-minus-buttons{
+    background-color: rgb(166, 192, 241);
+    border : 1px solid black;
+    border-radius: 20px;
+    width: 15%;
+    height: 30px;
+}
+
+.start-stop-buttons{
+    background-color: rgb(166, 192, 241);
+    border : 1px solid black;
+    border-radius: 20px;
+    width: 30%;
+    height: 30px;
+}
+
+#break-label, #session-label, #timer-label{
+    padding-bottom: 10px;
+}
+
+#title{
+    text-align: center;
+}
+
+#break-div, #session-div{
+    padding-bottom: 10px;
+}
+
+#title-div{
+    margin: 0;
+    padding: 0;
 }
