@@ -4,7 +4,8 @@ const defaultState = {
     breakTime: 5,
     sessionTime: 25,
     display: 'session',
-    reset: true
+    reset: false,
+    running: 'stop'
 }
 const BREAKINCREMENT = 'BREAKINCREMENT';
 const BREAKDECREMENT = 'BREAKDECREMENT';
@@ -54,6 +55,7 @@ const reducer = (state = defaultState, action) => {
                 return state;
             }
         case STARTSESSION:
+            
             newState.reset = false;
             newState.sessionTime--;
             return newState;
@@ -92,38 +94,49 @@ function sessionIncrement(){
     });
     render();
 }
+
+let running = 'stop';
 function startStop(){
     let newState = store.getState();
-    newState.reset = false;
-    newState.breakTime = newState.breakLength + 1;
-    let timer = setInterval(() => {
-            if(newState.reset === true){
-                clearInterval(timer);
-            }
-            else if(newState.display === 'session'){
-                store.dispatch({
-                    type: STARTSESSION
-                });
-                render();
-                newState = store.getState();
-                if(newState.sessionTime === 0){
-                newState.display = 'break';
-                newState.sessionTime = newState.sessionLength + 1;
+    if(running === 'stop'){
+        running = 'start';
+        newState.breakTime = newState.breakLength + 1;
+        var timer = setInterval(() => {
+                if(newState.reset === true){
+                    clearInterval(timer);
                 }
-            }
-            else if(newState.display === 'break'){
-                store.dispatch({
-                    type: STARTBREAK
-                });
-                render();
-                newState = store.getState();
-                if(newState.breakTime === 0){
-                    newState.display = 'session';
-                    newState.breakTime = newState.breakLength + 1;
+                else if(running === 'start' && newState.display === 'session'){
+                    store.dispatch({
+                        type: STARTSESSION
+                    });
+                    render();
+                    newState = store.getState();
+                    if(newState.sessionTime === 0){
+                        newState.display = 'break';
+                        newState.sessionTime = newState.sessionLength + 1;
+                    }
                 }
-            }
-    }, 1000);
+                else if(running === 'start' && newState.display === 'break'){
+                    store.dispatch({
+                        type: STARTBREAK
+                    });
+                    render();
+                    newState = store.getState();
+                    if(newState.breakTime === 0){
+                        newState.display = 'session';
+                        newState.breakTime = newState.breakLength + 1;
+                    }
+                }
+        }, 1000);
+    }
+    else{
+        running = 'stop';
+        clearInterval(timer);
+    }
 }
+
+
+
 function reset(){
     let newState = store.getState();
     newState.reset = true;
