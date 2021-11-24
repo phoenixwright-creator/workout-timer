@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+
 body{
     margin: 0;
     padding: 0;
 }
 
 #main-container{
-    background-color: cornflowerblue;
-    font-family: 'Anton', sans-serif;
+    background-color: rgb(190, 206, 236);
+    font-family: 'Josefin Sans', sans-serif;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -18,7 +20,7 @@ body{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    background-color: blanchedalmond;
+    background-color: rgb(245, 234, 217);
     border: 2px solid black;
     border-radius: 5px;
     padding: 20px;
@@ -30,16 +32,15 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    font-size: 35px;
+    font-size: 30px;
     align-items: center;
-    
 }
 
 #session-box{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    font-size: 35px;
+    font-size: 30px;
     align-items: center;
 }
 
@@ -50,7 +51,7 @@ body{
 #startstop-box{
     display: flex;
     justify-content: space-evenly;
-    font-size: 35px;
+    font-size: 30px;
     align-items: center;
 }
 
@@ -60,26 +61,26 @@ body{
     border-radius: 20px;
     width: 15%;
     height: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
 }
 
 .start-stop-buttons{
     background-color: rgb(166, 192, 241);
     border : 1px solid black;
     border-radius: 20px;
-    width: 30%;
+    width: 25%;
     height: 30px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px;
 }
 
-#break-label, #session-label, #timer-label{
+#break-div, #session-div{
     padding-bottom: 10px;
 }
 
 #title{
     text-align: center;
-}
-
-#break-div, #session-div{
-    padding-bottom: 10px;
 }
 
 #title-div{

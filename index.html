@@ -5,29 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Workout Timer</title>
 </head>
 <body>
     <div id="main-container">
         <div id="content">
             <div id="title-div">
-                <h1 id="title">WorkoutTimer App</h1>
+                <h1 id="title">Chronomètre Entrainement</h1>
             </div>
             <div id="break-div">
-                <h2 id="break-label">Break Duration</h2>
+                <h2 id="break-label">Temps de Repos</h2>
                 <div id="break-box">
-                    <button id="break-decrement" class="plus-minus-buttons" onclick=breakDecrement()>-</button>
+                    <button id="break-decrement" class="plus-minus-buttons" onclick=breakDecrement()>&minus;</button>
                     <div id="break-length">BreakLength</div>
                     <button id="break-increment" class="plus-minus-buttons" onclick=breakIncrement()>+</button>
                 </div>
             </div>
             <div id="session-div">
-                <h2 id="session-label">Session Duration</h2>
+                <h2 id="session-label">Temps de travail</h2>
                 <div id="session-box">
-                    <button id="session-decrement" class="plus-minus-buttons" onclick=sessionDecrement()>-</button>
+                    <button id="session-decrement" class="plus-minus-buttons" onclick=sessionDecrement()>&minus;</button>
                     <div id="session-length">SessionLength</div>
                     <button id="session-increment" class="plus-minus-buttons" onclick=sessionIncrement()>+</button>
                 </div>
@@ -35,7 +32,7 @@
             <div id="workout-div">
                 <h2 id="timer-label">Session/Break</h2>
                 <div id="startstop-box">
-                    <button id="start-stop" class="start-stop-buttons" onclick=startStop()>Start/Stop</button>
+                    <button id="start-stop" class="start-stop-buttons" onclick=startStop()>Start</button>
                     <div id="time-left">Time Running (mm:ss)</div>
                     <button id="reset" class="start-stop-buttons" onclick=reset()>Reset</button>
                 </div>

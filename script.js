@@ -135,9 +135,9 @@ function reset(){
 function render(){
     const state = store.getState();
     const breakLength = document.getElementById("break-length");
-    breakLength.innerHTML = state.breakLength;
+    breakLength.innerHTML = state.breakLength + ' s';
     const sessionLength = document.getElementById("session-length");
-    sessionLength.innerHTML = state.sessionLength;
+    sessionLength.innerHTML = state.sessionLength + ' s';
     const timerLabel = document.getElementById("timer-label");
     const time = document.getElementById("time-left");
     if(state.display === 'session'){
