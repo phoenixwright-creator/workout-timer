@@ -1,27 +1,34 @@
 const defaultState = {
     breakLength: 5,
     sessionLength: 25,
-    breakTime: 5,
+    breakTime: 6,
     sessionTime: 25,
     display: 'session',
-    reset: false,
-    running: 'stop'
 }
+
 const BREAKINCREMENT = 'BREAKINCREMENT';
+
 const BREAKDECREMENT = 'BREAKDECREMENT';
+
 const SESSIONINCREMENT = 'SESSIONINCREMENT';
+
 const SESSIONDECREMENT = 'SESSIONDECREMENT';
+
 const STARTSESSION = 'STARTSESSION';
+
 const STARTBREAK = 'STARTBREAK';
+
 const STOP = 'STOP';
+
 const RESET = 'RESET';
+
 const reducer = (state = defaultState, action) => {
     const newState = Object.assign({}, state);
     switch(action.type){
         case BREAKINCREMENT:
             if(newState.breakLength < 60){
                 newState.breakLength++;
-                newState.breakTime = newState.breakLength;
+                newState.breakTime = newState.breakLength + 1;
                 return newState;
             }
             else{
@@ -30,7 +37,7 @@ const reducer = (state = defaultState, action) => {
         case BREAKDECREMENT:
             if(newState.breakLength > 1){
                 newState.breakLength--;
-                newState.breakTime = newState.breakLength;
+                newState.breakTime = newState.breakLength + 1;
                 return newState;
             }
             else{
@@ -55,8 +62,6 @@ const reducer = (state = defaultState, action) => {
                 return state;
             }
         case STARTSESSION:
-            
-            newState.reset = false;
             newState.sessionTime--;
             return newState;
         case STARTBREAK:
@@ -68,26 +73,32 @@ const reducer = (state = defaultState, action) => {
             return state;
     }
 };
+
 const store = Redux.createStore(reducer);
+
 Window.store = store;
+
 function breakDecrement(){
     store.dispatch({
         type: BREAKDECREMENT
     });
     render();
 }
+
 function breakIncrement(){
     store.dispatch({
         type: BREAKINCREMENT
     });
     render();
 }
+
 function sessionDecrement(){
     store.dispatch({
         type: SESSIONDECREMENT
     });
     render();
 }
+
 function sessionIncrement(){
     store.dispatch({
         type: SESSIONINCREMENT
@@ -96,21 +107,22 @@ function sessionIncrement(){
 }
 
 let running = 'stop';
+
+let timer;
+
 function startStop(){
     let newState = store.getState();
     if(running === 'stop'){
         running = 'start';
-        newState.breakTime = newState.breakLength + 1;
-        var timer = setInterval(() => {
-                if(newState.reset === true){
-                    clearInterval(timer);
-                }
-                else if(running === 'start' && newState.display === 'session'){
+        timer = setInterval(() => {
+            console.log(running);
+                if(running === 'start' && newState.display === 'session'){
                     store.dispatch({
                         type: STARTSESSION
                     });
                     render();
                     newState = store.getState();
+                    
                     if(newState.sessionTime === 0){
                         newState.display = 'break';
                         newState.sessionTime = newState.sessionLength + 1;
@@ -122,6 +134,7 @@ function startStop(){
                     });
                     render();
                     newState = store.getState();
+                    
                     if(newState.breakTime === 0){
                         newState.display = 'session';
                         newState.breakTime = newState.breakLength + 1;
@@ -129,22 +142,22 @@ function startStop(){
                 }
         }, 1000);
     }
-    else{
+    else if(running === 'start'){
         running = 'stop';
         clearInterval(timer);
+        render();
     }
 }
 
-
-
 function reset(){
     let newState = store.getState();
-    newState.reset = true;
+    clearInterval(timer);
     store.dispatch({
         type: RESET
     });
     render();
 }
+
 function render(){
     const state = store.getState();
     const breakLength = document.getElementById("break-length");
@@ -161,5 +174,13 @@ function render(){
         timerLabel.innerHTML = 'Break';
         time.innerHTML = state.breakTime + ":00";
     }
+    const startButton = document.getElementById('start-stop');
+    if(running === 'start'){
+        startButton.innerHTML = 'STOP';
+    }
+    else if(running === 'stop'){
+        startButton.innerHTML = 'START';
+    }
 }
+
 render();
