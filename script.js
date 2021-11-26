@@ -161,25 +161,25 @@ function reset(){
 function render(){
     const state = store.getState();
     const breakLength = document.getElementById("break-length");
-    breakLength.innerHTML = state.breakLength + ' s';
+    breakLength.innerHTML = state.breakLength;
     const sessionLength = document.getElementById("session-length");
-    sessionLength.innerHTML = state.sessionLength + ' s';
+    sessionLength.innerHTML = state.sessionLength;
     const timerLabel = document.getElementById("timer-label");
     const time = document.getElementById("time-left");
     if(state.display === 'session'){
         timerLabel.innerHTML = 'Session';
-        time.innerHTML = state.sessionTime + ":00";
+        time.innerHTML = parseInt(state.sessionTime/60) + ':' + state.sessionTime%60;
     }
     else if(state.display === 'break'){
         timerLabel.innerHTML = 'Break';
-        time.innerHTML = state.breakTime + ":00";
+        time.innerHTML = parseInt(state.breakTime/60) + ':' + state.breakTime%60;
     }
-    const startButton = document.getElementById('start-stop');
+    const startButton = document.getElementById('start_stop');
     if(running === 'start'){
-        startButton.innerHTML = 'STOP';
+        startButton.innerHTML = 'Stop';
     }
     else if(running === 'stop'){
-        startButton.innerHTML = 'START';
+        startButton.innerHTML = 'Start';
     }
 }
 
