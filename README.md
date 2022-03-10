@@ -1,2 +1,5 @@
 # workout-timer
- timer for your workout sessions
+
+A timer for your workout sessions
+
+Link : https://phoenixwright-creator.github.io/workout-timer/
